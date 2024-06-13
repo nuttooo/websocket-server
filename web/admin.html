@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        async function sendCommand(command) {
+            const response = await fetch(`/admin/${command}`, {
+                method: 'POST'
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <button onclick="sendCommand('start')">Start Game</button>
+        <button onclick="sendCommand('stop')">Stop Game</button>
+    </div>
+</body>
+</html>

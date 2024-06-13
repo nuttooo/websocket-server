@@ -1,12 +1,24 @@
 version: '3'
 services:
-  websocket:
-    build: .
+  websocket-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.websocket
     ports:
       - "8766:8766"
-  nginx:
-    build: ./nginx
+      - "8767:8767"
+    depends_on:
+      - redis
+
+  web:
+    build:
+      context: ./web
     ports:
       - "80:80"
     depends_on:
-      - websocket
+      - websocket-server
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
